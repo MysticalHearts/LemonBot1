@@ -1,0 +1,17 @@
+@commands.command()
+  async def dm(self, ctx, member: discord.Member, *, msg):
+    setup = await checkSetUp(ctx)
+    if setup:
+      result = await checkManage(ctx)
+      guild_info = await getInfo(ctx)
+      if result:
+        em = discord.Embed(title=f"{guild_info[6]} {ctx.guild.name} Notification", description=f"", color = discord.Color.from_rgb(47,49,54))
+        em.add_field(name="Message", value=msg)
+        await member.send(embed=em)
+
+        await ctx.send(f"{guild_info[6]}  *{ctx.author.mention}* Your DM to {member} ({member.id}) has successfully sent!")
+        return
+      else:
+        return
+    else:
+      return
